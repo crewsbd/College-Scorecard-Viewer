@@ -2,9 +2,22 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../GlobalContext";
 import ObjectView from "./ObjectView";
 
+export type SchoolData = {
+  results: [
+    {
+      school: {
+        name: string;
+        address: string;
+        city: string;
+      }
+
+    }
+  ]
+}
+
 export default function MainView({ id }: { id: string }) {
   const { apiKey } = useContext(GlobalContext);
-  const [schoolData, changeSchoolData] = useState<object>({});
+  const [schoolData, changeSchoolData] = useState<SchoolData | null>(null);
 
   useEffect(() => {
     async function getCollegeData() {
@@ -20,9 +33,12 @@ export default function MainView({ id }: { id: string }) {
 
   console.log("SCHOOL DATA");
   console.dir(schoolData);
+
+  
+
+
   return (
     <div id="main_view">
-  
       <div className="float_header">
         <h3>
           {schoolData?.results?.[0]?.school?.name
@@ -41,7 +57,9 @@ export default function MainView({ id }: { id: string }) {
             : "None"}
         </div>
       </div>
-      <div><ObjectView dataObject={schoolData?.results?.[0]} /></div>
+      <div>
+        <ObjectView dataObject={schoolData?.results?.[0]} />
+      </div>
     </div>
   );
 }

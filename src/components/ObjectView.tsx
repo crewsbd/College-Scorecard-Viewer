@@ -1,6 +1,9 @@
 import React from "react";
 
-export default function ObjectView({ dataObject }: { dataObject: object }) {
+// import { SchoolData } from "./MainView";
+
+
+export default function ObjectView({ dataObject }: { dataObject: unknown}) {
   function toggleVisible(event: React.MouseEvent<HTMLDivElement>) {
     console.log("CLICK!");
     event.stopPropagation();
@@ -19,7 +22,7 @@ export default function ObjectView({ dataObject }: { dataObject: object }) {
     event.currentTarget.classList.remove("hover_js");
   }
 
-  function traverseObjectHTML(name: string, data: object, level: number) {
+  function traverseObjectHTML(name: string, data: object | null, level: number) {
     let newChild = <></>;
     let keyIterator = 0;
 
@@ -102,7 +105,7 @@ export default function ObjectView({ dataObject }: { dataObject: object }) {
     );
   }
 
-  const schoolData = traverseObjectHTML("School Data", dataObject, 0);
+  const schoolData = traverseObjectHTML("School Data", dataObject as object, 0);
 
   return <ul className="object_viewer">{schoolData}</ul>;
 }
