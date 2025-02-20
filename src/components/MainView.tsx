@@ -9,8 +9,9 @@ export type SchoolData = {
         name: string;
         address: string;
         city: string;
+        state: string;
+        zip: string;
       }
-
     }
   ]
 }
@@ -54,6 +55,13 @@ export default function MainView({ id }: { id: string }) {
         <div>
           {schoolData?.results?.[0]?.school?.city
             ? schoolData.results[0].school.city
+            : "None"}
+          ,{" "}
+          {schoolData?.results?.[0]?.school?.state
+            ? schoolData.results[0].school.state
+            : "None"}{" "}
+          {schoolData?.results?.[0]?.school?.zip
+            ? schoolData.results[0].school.zip
             : "None"}
         </div>
       </div>
